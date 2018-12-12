@@ -10,7 +10,7 @@ fi
 echo "Where shall I put the template file? (absolute path)"
 read templateFilePath
 
-if [ ! -d "$templateFile" ]; then
+if [ ! -d "$templateFilePath" ]; then
 		echo 'Error: Path provided does not exist!'
 		exit 1
 fi
@@ -21,4 +21,3 @@ cd $templateFilePath
 wget https://raw.githubusercontent.com/Gurran/git-template/master/commit-template
 
 git config --global commit.template $templateFilePath/commit-template
-
