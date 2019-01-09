@@ -50,23 +50,27 @@ fi
 # Disallow commits on master and development
 branch="$(git rev-parse --abbrev-ref HEAD)"
 
+echo -n "Checking Branch Permissions: "
 if [ "$branch" = "master" ]; then
+  printf "${RED}FAILED${NC}\n"
   echo "Commits on master is not allowed! Only Merges are allowed!"
   exit 1
 fi
 
 if [ "$branch" = "development" ]; then
+  printf "${RED}FAILED${NC}\n"
   echo "Commits on development is not allowed! Only Merges are allowed!"
   exit 1
 fi
 
 if [ "$branch" = "dev" ]; then
+  printf "${RED}FAILED${NC}\n"
   echo "Commits on dev is not allowed! Only Merges are allowed!"
   exit 1
 fi
 
-#Disallow commits if TSLint finds errors
-pass=true
+echo -ne "\b "
+printf "${GREEN}PASSED${NC}\n"
 
 #Disallow commits if TSLint finds errors
 spin[0]="-"
