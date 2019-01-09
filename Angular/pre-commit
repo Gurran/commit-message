@@ -1,11 +1,13 @@
-#!/bin/sh
-#
+#!/bin/bash
 # An example hook script to verify what is about to be committed.
 # Called by "git commit" with no arguments.  The hook should
 # exit with non-zero status after issuing an appropriate message if
 # it wants to stop the commit.
 #
 # To enable this hook, rename this file to "pre-commit".
+RED='\033[1;31m'
+GREEN='\033[0;32m'
+NC='\033[0m'
 
 if git rev-parse --verify HEAD >/dev/null 2>&1
 then
@@ -66,23 +68,37 @@ fi
 #Disallow commits if TSLint finds errors
 pass=true
 
-RED='\033[1;31m'
-GREEN='\033[0;32m'
-NC='\033[0m'
+#Disallow commits if TSLint finds errors
+spin[0]="-"
+spin[1]="\\"
+spin[2]="|"
+spin[3]="/"
 
-echo "Linting Your Code:"
 
 # Run tslint and get the output and return code
-tslint=$(ng lint)
+tslint=$(ng lint) &
+pid=$! # Process Id of the previous running command
+
+echo -n "Checking Code Style: ${spin[0]}"
+while kill -0 $pid 2>/dev/null
+do
+    for i  in "${spin[@]}"
+    do
+        echo -ne "\b$i"
+        sleep 0.1
+    done
+done
+
+echo -ne "\b "
+
 ret_code=$?
 # If it didn't pass, announce it failed and print the output
 if [ $ret_code != 0 ]; then
-		printf "\n${RED}tslint failed:${NC}"
-		echo "$tslint\n"
-		pass=false
+		printf "${RED}FAILED:${NC}"
+		echo "$tslint"
+        exit 1
 else
-		printf "${GREEN}tslint passed.${NC}\n"
+		printf "${GREEN}PASSED:${NC}\n"
 		exit 0
 fi
 
-exit 1
