@@ -72,37 +72,57 @@ fi
 echo -ne "\b "
 printf "${GREEN}PASSED${NC}\n"
 
-#Disallow commits if TSLint finds errors
-spin[0]="-"
-spin[1]="\\"
-spin[2]="|"
-spin[3]="/"
+#########################################
+# Check Staged Files for Styling Errors #
+#########################################
 
+# Get all staged files
 
-# Run tslint and get the output and return code
-tslint=$(ng lint) &
-pid=$! # Process Id of the previous running command
-
-echo -n "Checking Code Style: ${spin[0]}"
-while kill -0 $pid 2>/dev/null
-do
-    for i  in "${spin[@]}"
-    do
-        echo -ne "\b$i"
-        sleep 0.1
-    done
-done
-
-echo -ne "\b "
-
-ret_code=$?
-# If it didn't pass, announce it failed and print the output
-if [ $ret_code != 0 ]; then
-		printf "${RED}FAILED:${NC}"
-		echo "$tslint"
-        exit 1
-else
-		printf "${GREEN}PASSED:${NC}\n"
-		exit 0
+# Check for tslint
+which tslint &> /dev/null
+if [[ "$?" == 1 ]]; then
+  printf "${RED}Please install TS Lint${NC}\n"
+  exit 1
 fi
+
+# Show status
+echo -n "Checking Code Style: "
+
+OUTPUT=$(tslint --project tslint.json)
+if [[ "$?" != 0 ]]; then
+    printf "${RED}FAILED${NC}\n"
+    echo "${OUTPUT}"
+    exit 1
+else
+    printf "${GREEN}PASSED${NC}\n"
+fi
+
+#########################################
+# Check Staged Files for Format Errors  #
+#########################################
+
+# Show status
+echo -n "Checking Code Format: "
+
+# Check for prettier
+which prettier &> /dev/null
+
+if [[ "$?" == 1 ]]; then
+  printf "${RED}Please install Prettier CLI${NC}"
+  exit 1
+fi
+
+gitRoot="$(git rev-parse --show-toplevel)"
+
+OUTPUT=$(prettier --config $gitRoot"/.prettierrc" -c $gitRoot"/src/**/*" $gitRoot"/*")
+
+if [[ "$?" != 0 ]]; then
+    printf "${RED}FAILED${NC}\n"
+    echo "${OUTPUT}"
+    exit 1
+else
+    printf "${GREEN}PASSED${NC}\n"
+fi
+
+
 
