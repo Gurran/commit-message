@@ -9,7 +9,7 @@
 # |<----      Limit Each Line to a Maximum Of 72 Characters       ---->|
 
 # [Footer] Work Item Number (Optional)
-# Reference Azure Items by AB#<id> ('Fixes AB#<id>' sets items to done)
+# Reference Azure Items by #<id> ('Fixes #<id>' sets items to done)
 
 # --- COMMIT END ---
 # Type can be:
@@ -30,6 +30,6 @@
 #	This commit throws Tron's disc into MCP (causing its deresolution)   #
 #	and turns it back into a chess game.                                 #
 #                                                                        #
-#	Fixes AB#142                                                         #
+#	Fixes #142                                                           #
 #                                                                        #
 ##########################################################################
