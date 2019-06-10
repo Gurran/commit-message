@@ -1,20 +1,20 @@
 # [Subject] If applied, this commit will..
 
-# Use prefix:
-# (Add, Drop, Fix, Bump, Make, Refactor, Reformat, Rephrase, Document)
-# Use 50 characters maximum.
+# Use one of the following prefixes:
+# build, ci, docs, feat, fix, perf, refactor, style, test
 # Do not use a sentence-ending period.
 
-# ^^ Leave This Line Alone ^^
-# [Body] Why was this neccesary. ((Optional)
+# ^^ Leave This Line Empty ^^
+# [Body] Why was this neccesary. (Optional)
 
 
-# Work Item Number (Optional)
+# [Footer] Work Item Number (Optional)
 
 #	Example Commit Message:
+#
 ##########################################################################
 #                                                                        #
-#	Drop: Derezz the master control program                              #
+#	fix: derezz the master control program                               #
 #                                                                        #
 #	MCP turned out to be evil and had become intent on world domination. #
 #	This commit throws Tron's disc into MCP (causing its deresolution)   #
