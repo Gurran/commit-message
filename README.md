@@ -1,3 +1,5 @@
+Template can be viewed [here](commit-msg?ts=4)
+
 # Installation 
 
 Clone repo<br>
