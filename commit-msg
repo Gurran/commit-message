@@ -1,17 +1,27 @@
-# [Subject] If applied, this commit will..
+# <type>: <subject> 
+# [Subject] (If applied, this commit will...)
+# |<----   Use a Maximum Of 50 Characters   ---->|
+                                                  
+# ↓↓ Leave this line empty ↓↓
 
-# Use one of the following prefixes:
-# build, ci, docs, feat, fix, perf, refactor, style, test
-# Do not use a sentence-ending period.
-
-# ^^ Leave This Line Empty ^^
-# [Body] Why was this neccesary. (Optional)
-
+# ↑↑ Leave this line empty ↑↑
+# [Body] (Why was this neccesary? Explain) (Optional)
+# |<----      Limit Each Line to a Maximum Of 72 Characters       ---->|
 
 # [Footer] Work Item Number (Optional)
+# Reference Azure Items by AB#<id> ('Fixes AB#<id>' sets items to done)
 
-#	Example Commit Message:
+# --- COMMIT END ---
+# Type can be:
+#    feat     (new feature)
+#    fix      (bug fix)
+#    refactor (refactoring production code)
+#    style    (formatting, missing semi colons, etc; no code change)
+#    docs     (changes to documentation)
+#    test     (adding or refactoring tests; no production code change)
+#    chore    (updating grunt tasks etc; no production code change)
 #
+#	Example Commit Message:
 ##########################################################################
 #                                                                        #
 #	fix: derezz the master control program                               #
@@ -20,6 +30,6 @@
 #	This commit throws Tron's disc into MCP (causing its deresolution)   #
 #	and turns it back into a chess game.                                 #
 #                                                                        #
-#	Fixes #142                                                           #
+#	Fixes AB#142                                                         #
 #                                                                        #
 ##########################################################################
